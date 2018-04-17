@@ -13,6 +13,7 @@ public class Player : MonoBehaviour {
     private float rotationValue;
     private float rotationStep;
     private float maxRotationValue;
+    Vector2 direction;
 
 	// Use this for initialization
 	void Start () {
@@ -20,11 +21,12 @@ public class Player : MonoBehaviour {
         boundingBox = gameObject.GetComponent<BoxCollider2D>();
         mainCamera = Camera.main;
         position = transform.position;
-        maxVelocity = 10.0f;
+        maxVelocity = 20.0f;
         maxForce = 20.0f;
         rotationValue = 0.0f;
-        rotationStep = 5.0f;
-        maxRotationValue = 20.0f;
+        rotationStep = 3.0f;
+        maxRotationValue = 3.0f;
+        direction = rb.transform.up;
 	}
 	
 	// Update is called once per frame
@@ -56,10 +58,28 @@ public class Player : MonoBehaviour {
                 }
             }
 
-            Vector3 rotation = rb.transform.right * rotationValue;
-            Debug.Log(rotation);
-            rb.AddForce(rb.transform.transform.right * rotationValue);
-            rb.MoveRotation(rotation.x);
+            //Vector3 rotation = rb.transform.right * rotationValue;
+            //Debug.Log(rotation);
+            /*Vector2 pastVelocity = rb.velocity;
+            if(pastVelocity.magnitude == 0.0f)
+            {
+                pastVelocity = direction;
+            }
+            //Debug.Log(rotationValue);
+            //rb.AddForce(rb.transform.right * rotationValue);
+            Vector2 currentVelocity = rb.velocity;
+            if(currentVelocity.magnitude == 0.0f)
+            {
+                currentVelocity = pastVelocity;
+            }
+            float rotationAngle = Vector2.Dot(pastVelocity, currentVelocity) / (pastVelocity.magnitude * currentVelocity.magnitude);
+            Debug.Log(rotationAngle);*/
+            
+            //direction = rb.velocity.normalized;
+            //float rotationAngle += rb.transform.up + currentVelocity; //Vector2.Dot(rb.transform.up, currentVelocity) / (rb.transform.up.magnitude * currentVelocity.magnitude);
+            //Debug.Log(rotationAngle);
+            //Debug.Log("Up: " + rb.transform.up);
+            //rb.MoveRotation(rotationAngle);
         }
 
         else if (Input.GetKey(KeyCode.S))
@@ -87,14 +107,21 @@ public class Player : MonoBehaviour {
                 rb.velocity = Vector2.zero;
             }
         }
+        rb.MoveRotation(rb.rotation + rotationValue);
 
         if (Input.GetKey(KeyCode.D))
         {
+            rotationValue = -maxRotationValue;
             if (rotationValue > -maxRotationValue)
             {
-                rotationValue -= rotationStep * Time.deltaTime;
+                rotationValue -= rotationStep; // * Time.deltaTime;
                 //float deltaRotationValue = -rotationValue * Time.deltaTime;
                 //rb.MoveRotation(rb.rotation + deltaRotationValue);
+            }
+
+            else
+            {
+                rotationValue = -maxRotationValue;
             }
         }
 
@@ -102,15 +129,21 @@ public class Player : MonoBehaviour {
         {
             if (rotationValue < maxRotationValue)
             {
-                rotationValue += rotationStep * Time.deltaTime;
+                rotationValue += rotationStep; // * Time.deltaTime;
                 //float deltaRotationValue = rotationValue * Time.deltaTime;
                 //rb.MoveRotation(rb.rotation + deltaRotationValue);
+            }
+
+            else
+            {
+                rotationValue = maxRotationValue;
             }
         }
 
         else
         {
-            if (rotationValue < maxRotationValue || rotationValue > -maxRotationValue)
+            rotationValue = 0.0f;
+            /*if (rotationValue < 0.1f && rotationValue > -0.1f)
             {
                 rotationValue = 0.0f;
             }
@@ -123,7 +156,7 @@ public class Player : MonoBehaviour {
             else if (rotationValue < 0.0f)
             {
                 rotationValue += rotationStep * Time.deltaTime;
-            }
+            }*/
         }
     }
 }
