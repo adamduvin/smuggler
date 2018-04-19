@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212611525260169364}
   - component: {fileID: 61180985320695944}
   - component: {fileID: 50547792083204398}
+  - component: {fileID: 114780084982011658}
   m_Layer: 0
   m_Name: Dropoff
   m_TagString: Untagged
@@ -87,6 +88,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5.12, y: 5.12}
   m_EdgeRadius: 0
+--- !u!114 &114780084982011658
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1183530635566804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44146f21b63acaf46a912ee5878569ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212611525260169364
 SpriteRenderer:
   m_ObjectHideFlags: 1
