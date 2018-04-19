@@ -101,7 +101,7 @@ public class Player : MonoBehaviour {
                 }
             }
 
-            rb.MoveRotation(rb.rotation + rotationValue);
+            rb.MoveRotation(rb.rotation - rotationValue);
         }
 
         else
