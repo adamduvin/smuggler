@@ -13,6 +13,7 @@ public class Player : MonoBehaviour {
     private float rotationValue;
     private float rotationStep;
     private float maxRotationValue;
+	public bool hasSupplies;
     Vector2 direction;
 
 	// Use this for initialization
