@@ -28,6 +28,7 @@ public class Player : MonoBehaviour {
         rotationStep = 0.5f;
         maxRotationValue = 1.0f;
         direction = rb.transform.up;
+        hasSupplies = false;
 	}
 	
 	// Update is called once per frame
