@@ -15,6 +15,7 @@ public class Player : MonoBehaviour {
     private float maxRotationValue;
 	public bool hasSupplies;
     Vector2 direction;
+    public bool atCheckpoint;
 
 	// Use this for initialization
 	void Start () {
@@ -29,6 +30,7 @@ public class Player : MonoBehaviour {
         maxRotationValue = 1.0f;
         direction = rb.transform.up;
         hasSupplies = false;
+        atCheckpoint = false;
 	}
 	
 	// Update is called once per frame
@@ -38,7 +40,10 @@ public class Player : MonoBehaviour {
 
     void FixedUpdate()
     {
-        Move();
+        if (!atCheckpoint)
+        {
+            Move();
+        }
     }
 
     void Move()

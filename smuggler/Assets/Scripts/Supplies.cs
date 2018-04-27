@@ -17,16 +17,13 @@ public class Supplies : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		//if(Collision) collision logic
-		//player.hasSupplies = true;
+		
 	}
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        //Debug.Log(other.gameObject.tag);
         if(other.gameObject.tag == "Player")
         {
-            Debug.Log(other.gameObject.tag);
             if (!player.hasSupplies)
             {
                 player.hasSupplies = true;

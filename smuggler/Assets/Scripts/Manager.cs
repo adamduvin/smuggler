@@ -12,16 +12,24 @@ public class Manager : MonoBehaviour {
     public Text scoreText;
     public Text alertText;
     public Image suppliesIndicator;
+    private bool makeVisible;
+    private bool wait;
+    private Color textColor;
+    private Color suppliesColor;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         timer = 60.0f;
         timerText.text = "Time: " + Mathf.Ceil(timer);
         notoriety = 0;
         score = 0;
         scoreText.text = "Score: " + score;
         alertText.text = "Supplies Acquired";
-	}
+        makeVisible = false;
+        wait = false;
+        textColor = alertText.color;
+        suppliesColor = suppliesIndicator.color;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -51,11 +59,18 @@ public class Manager : MonoBehaviour {
         timerText.text += second;
     }
 
+    public void IncrementScore()
+    {
+        score += 100;
+        scoreText.text = "Score: " + score;
+    }
+
     public void SetAlertUIVisible(bool visible)
     {
         if (visible)
         {
-            Color textColor = alertText.color;
+            makeVisible = true;
+            textColor = alertText.color;
             textColor.a = 1.0f;
             alertText.color = textColor;
 
@@ -66,13 +81,19 @@ public class Manager : MonoBehaviour {
 
         else
         {
+            makeVisible = false;
             Color textColor = alertText.color;
             textColor.a = 0.0f;
             alertText.color = textColor;
 
-            Color suppliesColor = suppliesIndicator.color;
+            suppliesColor = suppliesIndicator.color;
             suppliesColor.a = 0.0f;
             suppliesIndicator.color = suppliesColor;
         }
+    }
+
+    private void LerpTextOpacity(bool visible, Color color)
+    {
+
     }
 }
