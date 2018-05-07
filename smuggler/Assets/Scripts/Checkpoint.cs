@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Checkpoint : MonoBehaviour {
 
@@ -46,7 +47,7 @@ public class Checkpoint : MonoBehaviour {
                 gameManager.SetAlertUIVisible(true);
                 if (player.hasSupplies)
                 {
-                    Debug.Log("GameOver");
+					SceneManager.LoadScene("gameOver", LoadSceneMode.Single);
                 }
             }
         }
