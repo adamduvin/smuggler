@@ -27,8 +27,14 @@ public class Supplies : MonoBehaviour {
             if (!player.hasSupplies)
             {
                 player.hasSupplies = true;
-                gameManager.SetAlertUIVisible(true);
+                gameManager.alertText.text = "Supplies Acquired";
+                gameManager.SetAlertUIVisible(true, true);
                 Destroy(gameObject);
+            }
+            else
+            {
+                gameManager.alertText.text = "Already Carrying Supplies";
+                gameManager.SetAlertUIVisible(true, true);
             }
         }
     }

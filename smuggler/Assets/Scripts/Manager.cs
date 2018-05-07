@@ -14,9 +14,11 @@ public class Manager : MonoBehaviour {
     public Text alertText;
     public Image suppliesIndicator;
     private bool makeVisible;
-    private bool wait;
+    private float wait;
+    private float percent;
     private Color textColor;
     private Color suppliesColor;
+    public GameObject player;
 
     // Use this for initialization
     void Start () {
@@ -27,7 +29,8 @@ public class Manager : MonoBehaviour {
         scoreText.text = "Score: " + score;
         alertText.text = "Supplies Acquired";
         makeVisible = false;
-        wait = false;
+        wait = 1.0f;
+        percent = 0.0f;
         textColor = alertText.color;
         suppliesColor = suppliesIndicator.color;
     }
@@ -35,6 +38,10 @@ public class Manager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         DecrementTime();
+        if (makeVisible)
+        {
+            LerpTextOpacity(textColor);
+        }
 	}
 
     void DecrementTime()
@@ -67,24 +74,27 @@ public class Manager : MonoBehaviour {
         scoreText.text = "Score: " + score;
     }
 
-    public void SetAlertUIVisible(bool visible)
+    public void SetAlertUIVisible(bool visible, bool suppliesGet)
     {
         if (visible)
         {
-            makeVisible = true;
             textColor = alertText.color;
             textColor.a = 1.0f;
             alertText.color = textColor;
 
-            Color suppliesColor = suppliesIndicator.color;
-            suppliesColor.a = 1.0f;
-            suppliesIndicator.color = suppliesColor;
+            if (suppliesGet)
+            {
+                makeVisible = true;
+                Color suppliesColor = suppliesIndicator.color;
+                suppliesColor.a = 1.0f;
+                suppliesIndicator.color = suppliesColor;
+            }
         }
 
         else
         {
-            makeVisible = false;
-            Color textColor = alertText.color;
+            //makeVisible = false;
+            textColor = alertText.color;
             textColor.a = 0.0f;
             alertText.color = textColor;
 
@@ -94,8 +104,29 @@ public class Manager : MonoBehaviour {
         }
     }
 
-    private void LerpTextOpacity(bool visible, Color color)
+    private void LerpTextOpacity(Color color)
     {
+        if(wait >= 0.0f)
+        {
+            wait -= Time.deltaTime;
+        }
 
+        else
+        {
+            if(percent < 1.0f)
+            {
+                Color alertTextColor = alertText.color;
+                alertTextColor.a = Mathf.Lerp(1.0f, 0.0f, percent);
+                percent += 0.5f * Time.deltaTime;
+                alertText.color = alertTextColor;
+            }
+
+            else
+            {
+                percent = 0.0f;
+                wait = 1.0f;
+                makeVisible = false;
+            }
+        }
     }
 }

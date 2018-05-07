@@ -31,7 +31,7 @@ public class DropOff : MonoBehaviour {
                 gameManager.IncrementScore();
                 uses--;
                 player.hasSupplies = false;
-                gameManager.SetAlertUIVisible(false);
+                gameManager.SetAlertUIVisible(false, false);
                 if (uses <= 0)
                 {
                     Destroy(gameObject);

@@ -12,6 +12,8 @@ public class Checkpoint : MonoBehaviour {
     private float maxTime;
     public bool atPointOne;
     public bool atPointTwo;
+    public bool atPointThree;
+    public bool atPointFour;
     private Transform[] locations;
 
     // Use this for initialization
@@ -24,6 +26,8 @@ public class Checkpoint : MonoBehaviour {
         maxTime = timer = 3;
         atPointOne = false;
         atPointTwo = false;
+        atPointThree = false;
+        atPointFour = false;
         locations = gameObject.GetComponentsInChildren<Transform>();
     }
 
@@ -39,12 +43,12 @@ public class Checkpoint : MonoBehaviour {
     {
         if (other.gameObject.tag == "Player")
         {
-            if(atPointOne || atPointTwo)
+            if(atPointOne || atPointTwo || atPointThree || atPointFour)
             {
                 playerAtCheckpoint = true;
                 player.atCheckpoint = true;
                 gameManager.alertText.text = "Search in Progress";
-                gameManager.SetAlertUIVisible(true);
+                gameManager.SetAlertUIVisible(true, false);
                 if (player.hasSupplies)
                 {
 					SceneManager.LoadScene("gameOver", LoadSceneMode.Single);
@@ -62,19 +66,41 @@ public class Checkpoint : MonoBehaviour {
             playerAtCheckpoint = false;
             player.atCheckpoint = false;
 
-            gameManager.SetAlertUIVisible(false);
+            gameManager.SetAlertUIVisible(false, false);
 
             if (atPointOne)
             {
-                player.gameObject.transform.position = locations[2].position;
+                Vector3 position = locations[2].position;
+                position.x -= locations[2].GetComponent<BoxCollider2D>().size.x / 2;
+                position.z = player.gameObject.transform.position.z;
+                player.gameObject.transform.position = position;
             }
             else if (atPointTwo)
             {
-                player.gameObject.transform.position = locations[1].position;
+                Vector3 position = locations[1].position;
+                position.x += locations[1].GetComponent<BoxCollider2D>().size.x / 2;
+                position.z = player.gameObject.transform.position.z;
+                player.gameObject.transform.position = position;
+            }
+            else if (atPointThree)
+            {
+                Vector3 position = locations[4].position;
+                position.y -= locations[4].GetComponent<BoxCollider2D>().size.y / 2;
+                position.z = player.gameObject.transform.position.z;
+                player.gameObject.transform.position = position;
+            }
+            else if (atPointFour)
+            {
+                Vector3 position = locations[3].position;
+                position.y += locations[3].GetComponent<BoxCollider2D>().size.y / 2;
+                position.z = player.gameObject.transform.position.z;
+                player.gameObject.transform.position = position;
             }
 
             atPointOne = false;
             atPointTwo = false;
+            atPointThree = false;
+            atPointFour = false;
         }
     }
 }

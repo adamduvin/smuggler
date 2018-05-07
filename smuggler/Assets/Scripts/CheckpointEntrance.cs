@@ -28,6 +28,14 @@ public class CheckpointEntrance : MonoBehaviour {
             {
                 checkpoint.atPointTwo = true;
             }
+            else if (gameObject.tag == "PointThree")
+            {
+                checkpoint.atPointThree = true;
+            }
+            else if (gameObject.tag == "PointFour")
+            {
+                checkpoint.atPointFour = true;
+            }
         }
     }
 }

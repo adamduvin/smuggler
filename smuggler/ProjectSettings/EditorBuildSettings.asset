@@ -4,4 +4,25 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/start.unity
+    guid: b69e5b725d3de984d96589a84f8df022
+  - enabled: 1
+    path: Assets/Scenes/mapsInstructions.unity
+    guid: 6ed939f8bc1817847be0c001046b951e
+  - enabled: 1
+    path: Assets/Scenes/supplies.unity
+    guid: fdc619bad0b7f9f41b477a0f086a4abb
+  - enabled: 1
+    path: Assets/Scenes/dropoffs.unity
+    guid: 3fc05745eef768846a3cf628ae270b61
+  - enabled: 1
+    path: Assets/Scenes/checkpoints.unity
+    guid: 4f1d17d1c5995064490b3fc4a54af4e2
+  - enabled: 1
+    path: Assets/Scenes/game.unity
+    guid: 6408ec3e1817f7e44883adbcfec24161
+  - enabled: 1
+    path: Assets/Scenes/gameOver.unity
+    guid: b5f5ac39d5b22914c889ca88b81e94d6
