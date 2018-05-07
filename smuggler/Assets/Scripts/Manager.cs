@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Manager : MonoBehaviour {
 
@@ -19,7 +20,7 @@ public class Manager : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        timer = 60.0f;
+        timer = 300.0f;
         timerText.text = "Time: " + Mathf.Ceil(timer);
         notoriety = 0;
         score = 0;
@@ -46,6 +47,7 @@ public class Manager : MonoBehaviour {
         else
         {
             timer = 0.0f;
+			SceneManager.LoadScene("gameOver", LoadSceneMode.Single);
         }
         float timerCiel = Mathf.Ceil(timer);
         float minute = Mathf.Floor(timerCiel / 60.0f);
