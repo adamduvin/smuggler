@@ -642,7 +642,9 @@ Prefab:
     - target: {fileID: 114044706850090322, guid: 214cfca1861ba6742b62931a16493867,
         type: 2}
       propertyPath: m_Text
-      value: Press space to begin
+      value: 'Press space to continue
+
+'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 214cfca1861ba6742b62931a16493867, type: 2}
@@ -848,7 +850,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 11dab792fc110e14fae68761ad7171a2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b483150834509c64ba5d1c9969fb35ee, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
