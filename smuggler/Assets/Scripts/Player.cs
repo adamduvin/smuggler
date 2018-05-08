@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
 
@@ -16,6 +17,8 @@ public class Player : MonoBehaviour {
 	public bool hasSupplies;
     Vector2 direction;
     public bool atCheckpoint;
+    public GameObject compass;
+    private Transform compassTransform;
 
 	// Use this for initialization
 	void Start () {
@@ -31,6 +34,7 @@ public class Player : MonoBehaviour {
         direction = rb.transform.up;
         hasSupplies = false;
         atCheckpoint = false;
+        compassTransform = compass.GetComponent<Transform>();
 	}
 	
 	// Update is called once per frame
@@ -44,6 +48,11 @@ public class Player : MonoBehaviour {
         {
             Move();
         }
+
+        // Rotates compass
+        Vector3 position = transform.position;
+        position += gameObject.transform.right * 5.0f;
+        compass.GetComponent<Transform>().position = position;
     }
 
     void Move()
@@ -66,6 +75,8 @@ public class Player : MonoBehaviour {
             }
 
             rb.MoveRotation(rb.rotation + rotationValue);
+            
+            //compassTransform.Rotate(new Vector3(0.0f, 0.0f, -(rb.rotation + rotationValue) * Mathf.Deg2Rad));
 
             //Vector3 rotation = rb.transform.right * rotationValue;
             //Debug.Log(rotation);
@@ -109,6 +120,8 @@ public class Player : MonoBehaviour {
             }
 
             rb.MoveRotation(rb.rotation - rotationValue);
+
+            //compassTransform.Rotate(new Vector3(0.0f, 0.0f, -(rb.rotation - rotationValue) * Mathf.Deg2Rad));
         }
 
         else

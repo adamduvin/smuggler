@@ -10,7 +10,6 @@ public class Manager : MonoBehaviour {
     public Text timerText;
     public int notoriety;
     public int score;
-    public Text scoreText;
     public Text alertText;
     public Image suppliesIndicator;
     private bool makeVisible;
@@ -19,6 +18,7 @@ public class Manager : MonoBehaviour {
     private Color textColor;
     private Color suppliesColor;
     public GameObject player;
+    public Image scoreCounter;
 
     // Use this for initialization
     void Start () {
@@ -26,7 +26,6 @@ public class Manager : MonoBehaviour {
         timerText.text = "Time: " + Mathf.Ceil(timer);
         notoriety = 0;
         score = 0;
-        scoreText.text = "Score: " + score;
         alertText.text = "Supplies Acquired";
         makeVisible = false;
         wait = 1.0f;
@@ -60,7 +59,7 @@ public class Manager : MonoBehaviour {
         float minute = Mathf.Floor(timerCiel / 60.0f);
         float second = Mathf.Ceil(timerCiel % 60.0f);
 
-        timerText.text = "Time: 0" + minute + ":";
+        timerText.text = "0" + minute + ":";
         if(second < 10)
         {
             timerText.text += "0";
@@ -70,8 +69,17 @@ public class Manager : MonoBehaviour {
 
     public void IncrementScore()
     {
-        score += 100;
-        scoreText.text = "Score: " + score;
+        score += 1;
+        //scoreText.text = "Score: " + score;
+
+        Vector2 position = scoreCounter.transform.position;
+        position.x += 14.19f;
+        scoreCounter.transform.position = position;
+
+        if(score == 8)
+        {
+            SceneManager.LoadScene("gameOver", LoadSceneMode.Single);
+        }
     }
 
     public void SetAlertUIVisible(bool visible, bool suppliesGet)
